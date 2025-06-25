@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foro ZONEPVP | Comunidad Oficial</title>
+    <title>Foro ZONEPVP | Moderación</title>
     <style>
         :root {
             --mc-orange: #FFAA00;
@@ -52,8 +52,12 @@
         /* Barra de usuario */
         .user-bar {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 5px;
         }
         
         .user-info {
@@ -70,120 +74,135 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
         }
         
-        .auth-btn {
-            background: var(--mc-orange);
-            color: black;
-            border: none;
+        .mod-badge {
+            background: var(--mc-red);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        
+        .btn {
             padding: 8px 15px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
         }
         
-        /* Contenido del foro */
-        .forum-content {
-            margin-top: 30px;
+        .btn-primary {
+            background: var(--mc-orange);
+            color: black;
         }
         
-        /* Categorías/Hilos */
-        .category {
-            background: rgba(10,10,10,0.8);
-            border: 3px solid var(--mc-gray);
-            border-radius: 10px;
-            margin-bottom: 30px;
-            overflow: hidden;
+        .btn-danger {
+            background: var(--mc-red);
+            color: white;
         }
         
-        .category-header {
-            background: rgba(255,170,0,0.1);
-            padding: 15px 20px;
-            border-bottom: 2px solid var(--mc-orange);
+        .btn-secondary {
+            background: var(--mc-gray);
+            color: white;
         }
         
-        .category-title {
+        /* Hilos y comentarios */
+        .thread {
+            background: rgba(20,20,20,0.8);
+            border: 2px solid var(--mc-gray);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .thread-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .thread-title {
             color: var(--mc-orange);
             font-size: 1.5rem;
         }
         
-        .threads-list {
-            padding: 15px;
-        }
-        
-        .thread {
-            padding: 15px;
-            margin-bottom: 15px;
-            background: rgba(30,30,30,0.6);
-            border-left: 3px solid var(--mc-gray);
-            transition: all 0.3s;
-        }
-        
-        .thread:hover {
-            border-left-color: var(--mc-orange);
-        }
-        
-        .thread-title {
-            color: white;
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-        }
-        
         .thread-meta {
-            color: #AAA;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: flex;
-            gap: 15px;
-        }
-        
-        .thread-author {
             color: var(--mc-green);
-        }
-        
-        .thread-date {
-            color: var(--mc-orange);
+            font-size: 0.9rem;
         }
         
         .thread-content {
-            color: #DDD;
+            margin-bottom: 20px;
             line-height: 1.5;
-            margin-bottom: 10px;
         }
         
         .thread-actions {
-            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
         }
         
-        .reply-btn {
-            background: var(--mc-gray);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 0.9rem;
+        .comments-container {
+            margin-top: 20px;
+            border-top: 1px solid var(--mc-gray);
+            padding-top: 15px;
         }
         
-        /* Botón de nuevo hilo */
-        .new-thread-btn {
-            background: var(--mc-dark-orange);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.3rem;
-            border-radius: 5px;
-            cursor: pointer;
-            display: block;
-            margin: 30px auto;
+        .comment {
+            background: rgba(30,30,30,0.6);
+            border-left: 3px solid var(--mc-gray);
+            padding: 15px;
+            margin-bottom: 15px;
             transition: all 0.3s;
         }
         
-        .new-thread-btn:hover {
-            background: var(--mc-orange);
+        .comment:hover {
+            border-left-color: var(--mc-orange);
         }
         
-        /* Formularios (ocultos inicialmente) */
-        .auth-form-container, .new-thread-form, .reply-form {
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            color: var(--mc-green);
+            font-weight: bold;
+        }
+        
+        .comment-date {
+            color: var(--mc-orange);
+            font-size: 0.8rem;
+        }
+        
+        .comment-actions {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .comment-form {
+            margin-top: 20px;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--mc-gray);
+            color: white;
+            border-radius: 5px;
+            min-height: 100px;
+            margin-bottom: 10px;
+        }
+        
+        /* Modales */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -191,171 +210,135 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.8);
-            z-index: 100;
+            z-index: 1000;
             align-items: center;
             justify-content: center;
         }
         
-        .auth-form, .thread-form {
-            background: rgba(10,10,10,0.9);
-            padding: 30px;
-            border: 3px solid var(--mc-gray);
+        .modal-content {
+            background: var(--mc-dark);
+            border: 3px solid var(--mc-orange);
             border-radius: 10px;
-            width: 100%;
-            max-width: 500px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
         }
         
-        .form-title {
+        .modal-title {
             color: var(--mc-orange);
-            text-align: center;
             margin-bottom: 20px;
-            font-size: 1.8rem;
+            text-align: center;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .form-label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             color: var(--mc-orange);
         }
         
-        .form-input, .form-textarea {
+        .form-input {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: rgba(0,0,0,0.5);
             border: 1px solid var(--mc-gray);
             color: white;
             border-radius: 5px;
         }
         
-        .form-textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .form-submit {
-            background: var(--mc-orange);
-            color: black;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
-        }
-        
-        .form-submit:hover {
-            background: white;
-        }
-        
-        .form-close {
-            background: var(--mc-gray);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
-            width: 100%;
-            border-radius: 5px;
-            cursor: pointer;
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
         
         footer {
             text-align: center;
             padding: 30px;
             margin-top: 50px;
-            border-top: 2px solid var(--mc-gray);
+            border-top: 1px solid var(--mc-gray);
         }
     </style>
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1 class="logo">FORO ZONEPVP</h1>
-            <p>Comunidad oficial del servidor</p>
+            <p>Comunidad oficial con moderación</p>
         </header>
         
         <!-- Barra de usuario -->
         <div class="user-bar">
             <div class="user-info" id="user-info">
-                <!-- Se llena dinámicamente cuando el usuario inicia sesión -->
+                <!-- Se llena dinámicamente -->
             </div>
-            <button class="auth-btn" id="auth-btn" onclick="showAuthForm('login')">INICIAR SESIÓN</button>
+            <button id="auth-btn" class="btn btn-primary">INICIAR SESIÓN</button>
         </div>
         
-        <!-- Contenido del foro (visible siempre) -->
-        <div class="forum-content">
-            <!-- Categoría principal -->
-            <div class="category">
-                <div class="category-header">
-                    <h2 class="category-title"><i class="fas fa-comments"></i> DISCUSIÓN GENERAL</h2>
-                </div>
-                <div class="threads-list" id="threads-list">
-                    <!-- Los hilos se cargarán aquí dinámicamente -->
-                </div>
-            </div>
-            
-            <!-- Botón para crear nuevo hilo (visible siempre pero funcional solo para logueados) -->
-            <button class="new-thread-btn" id="new-thread-btn" onclick="handleNewThreadClick()">
-                <i class="fas fa-plus"></i> CREAR NUEVO HILO
-            </button>
+        <!-- Lista de hilos -->
+        <div id="threads-container">
+            <!-- Los hilos se cargarán aquí -->
         </div>
         
-        <!-- Formularios flotantes -->
+        <!-- Botón de nuevo hilo -->
+        <button id="new-thread-btn" class="btn btn-primary" style="display: block; margin: 30px auto;">
+            CREAR NUEVO HILO
+        </button>
         
-        <!-- Formulario de autenticación -->
-        <div class="auth-form-container" id="auth-form-container">
-            <div class="auth-form">
-                <h2 class="form-title" id="auth-form-title">INICIAR SESIÓN</h2>
+        <!-- Modal de autenticación -->
+        <div id="auth-modal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-title" id="auth-modal-title">INICIAR SESIÓN</h2>
                 <div class="form-group">
-                    <label class="form-label">Correo electrónico:</label>
-                    <input type="email" class="form-input" id="auth-email" required>
+                    <label class="form-label">Correo electrónico</label>
+                    <input type="email" id="auth-email" class="form-input">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Contraseña:</label>
-                    <input type="password" class="form-input" id="auth-password" required>
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" id="auth-password" class="form-input">
                 </div>
-                <button class="form-submit" id="auth-submit-btn" onclick="handleAuthSubmit()">ENTRAR</button>
-                <button class="form-close" onclick="hideAuthForm()">CANCELAR</button>
-                <div style="text-align:center; margin-top:15px; color:#AAA;">
-                    <span id="auth-switch-text">¿No tienes cuenta?</span>
-                    <button style="background:none; border:none; color:var(--mc-orange); cursor:pointer; text-decoration:underline;" id="auth-switch-btn" onclick="switchAuthForm()">Regístrate</button>
+                <div class="form-actions">
+                    <button id="auth-submit-btn" class="btn btn-primary">ENTRAR</button>
+                    <button id="auth-switch-btn" class="btn btn-secondary">REGISTRARSE</button>
+                    <button id="auth-cancel-btn" class="btn btn-danger">CANCELAR</button>
                 </div>
             </div>
         </div>
         
-        <!-- Formulario de nuevo hilo -->
-        <div class="new-thread-form" id="new-thread-form">
-            <div class="thread-form">
-                <h2 class="form-title">NUEVO HILO</h2>
+        <!-- Modal de nuevo hilo -->
+        <div id="thread-modal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-title">NUEVO HILO</h2>
                 <div class="form-group">
-                    <label class="form-label">Título:</label>
-                    <input type="text" class="form-input" id="thread-title" required>
+                    <label class="form-label">Título</label>
+                    <input type="text" id="thread-title" class="form-input">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Contenido:</label>
-                    <textarea class="form-textarea" id="thread-content" required></textarea>
+                    <label class="form-label">Contenido</label>
+                    <textarea id="thread-content" class="form-textarea"></textarea>
                 </div>
-                <button class="form-submit" onclick="createThread()">PUBLICAR</button>
-                <button class="form-close" onclick="hideThreadForm()">CANCELAR</button>
+                <div class="form-actions">
+                    <button id="thread-submit-btn" class="btn btn-primary">PUBLICAR</button>
+                    <button id="thread-cancel-btn" class="btn btn-danger">CANCELAR</button>
+                </div>
             </div>
         </div>
         
-        <!-- Formulario de respuesta -->
-        <div class="reply-form" id="reply-form">
-            <div class="thread-form">
-                <h2 class="form-title">RESPONDER AL HILO</h2>
+        <!-- Modal de nuevo comentario -->
+        <div id="comment-modal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-title">NUEVO COMENTARIO</h2>
                 <div class="form-group">
-                    <label class="form-label">Respuesta:</label>
-                    <textarea class="form-textarea" id="reply-content" required></textarea>
+                    <textarea id="comment-content" class="form-textarea"></textarea>
                 </div>
-                <button class="form-submit" onclick="createReply()">PUBLICAR RESPUESTA</button>
-                <button class="form-close" onclick="hideReplyForm()">CANCELAR</button>
+                <div class="form-actions">
+                    <button id="comment-submit-btn" class="btn btn-primary">PUBLICAR</button>
+                    <button id="comment-cancel-btn" class="btn btn-danger">CANCELAR</button>
+                </div>
             </div>
         </div>
         
@@ -366,166 +349,225 @@
     </div>
 
     <script>
-        // Base de datos en localStorage
+        // Base de datos
         let users = JSON.parse(localStorage.getItem('forumUsers')) || [];
         let threads = JSON.parse(localStorage.getItem('forumThreads')) || [];
         let currentUser = JSON.parse(localStorage.getItem('currentForumUser')) || null;
-        let currentThreadIdForReply = null;
+        let currentThreadId = null;
+        let isLoginForm = true;
         
-        // Estado del formulario de autenticación (login/register)
-        let authFormMode = 'login';
+        // Moders (puedes cambiar estos emails por los de tus moderadores)
+        const MODERATORS = ['admin@zonepvp.com', 'mod1@zonepvp.com', 'mod2@zonepvp.com'];
         
-        // Mostrar formulario de autenticación
-        function showAuthForm(mode) {
-            authFormMode = mode;
-            const container = document.getElementById('auth-form-container');
-            const title = document.getElementById('auth-form-title');
-            const submitBtn = document.getElementById('auth-submit-btn');
-            const switchText = document.getElementById('auth-switch-text');
-            const switchBtn = document.getElementById('auth-switch-btn');
+        // Elementos del DOM
+        const authBtn = document.getElementById('auth-btn');
+        const userInfo = document.getElementById('user-info');
+        const newThreadBtn = document.getElementById('new-thread-btn');
+        const threadsContainer = document.getElementById('threads-container');
+        
+        // Modales
+        const authModal = document.getElementById('auth-modal');
+        const threadModal = document.getElementById('thread-modal');
+        const commentModal = document.getElementById('comment-modal');
+        
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUI();
+            loadThreads();
+            setupEventListeners();
+        });
+        
+        function setupEventListeners() {
+            // Autenticación
+            authBtn.addEventListener('click', handleAuthClick);
+            authSubmitBtn.addEventListener('click', handleAuthSubmit);
+            authSwitchBtn.addEventListener('click', handleAuthSwitch);
+            authCancelBtn.addEventListener('click', () => authModal.style.display = 'none');
             
-            if (mode === 'login') {
-                title.textContent = 'INICIAR SESIÓN';
-                submitBtn.textContent = 'ENTRAR';
-                switchText.textContent = '¿No tienes cuenta?';
-                switchBtn.textContent = 'Regístrate';
+            // Hilos
+            newThreadBtn.addEventListener('click', handleNewThreadClick);
+            threadSubmitBtn.addEventListener('click', handleThreadSubmit);
+            threadCancelBtn.addEventListener('click', () => threadModal.style.display = 'none');
+            
+            // Comentarios
+            commentSubmitBtn.addEventListener('click', handleCommentSubmit);
+            commentCancelBtn.addEventListener('click', () => commentModal.style.display = 'none');
+        }
+        
+        function updateUI() {
+            if (currentUser) {
+                const isMod = MODERATORS.includes(currentUser.email);
+                userInfo.innerHTML = `
+                    <div class="user-avatar">${currentUser.username.charAt(0).toUpperCase()}</div>
+                    <span>${currentUser.username}</span>
+                    ${isMod ? '<span class="mod-badge">MOD</span>' : ''}
+                `;
+                authBtn.textContent = 'CERRAR SESIÓN';
             } else {
-                title.textContent = 'REGISTRARSE';
-                submitBtn.textContent = 'CREAR CUENTA';
-                switchText.textContent = '¿Ya tienes cuenta?';
-                switchBtn.textContent = 'Iniciar sesión';
+                userInfo.innerHTML = '';
+                authBtn.textContent = 'INICIAR SESIÓN';
             }
-            
-            container.style.display = 'flex';
         }
         
-        // Ocultar formulario de autenticación
-        function hideAuthForm() {
-            document.getElementById('auth-form-container').style.display = 'none';
+        function handleAuthClick() {
+            if (currentUser) {
+                // Cerrar sesión
+                currentUser = null;
+                localStorage.removeItem('currentForumUser');
+                updateUI();
+            } else {
+                // Mostrar modal de login
+                isLoginForm = true;
+                authModalTitle.textContent = 'INICIAR SESIÓN';
+                authSubmitBtn.textContent = 'ENTRAR';
+                authSwitchBtn.textContent = 'REGISTRARSE';
+                authModal.style.display = 'flex';
+            }
         }
         
-        // Cambiar entre login/register
-        function switchAuthForm() {
-            authFormMode = authFormMode === 'login' ? 'register' : 'login';
-            showAuthForm(authFormMode);
+        function handleAuthSwitch() {
+            isLoginForm = !isLoginForm;
+            if (isLoginForm) {
+                authModalTitle.textContent = 'INICIAR SESIÓN';
+                authSubmitBtn.textContent = 'ENTRAR';
+                authSwitchBtn.textContent = 'REGISTRARSE';
+            } else {
+                authModalTitle.textContent = 'REGISTRARSE';
+                authSubmitBtn.textContent = 'REGISTRAR';
+                authSwitchBtn.textContent = 'INICIAR SESIÓN';
+            }
         }
         
-        // Manejar envío de formulario de autenticación
         function handleAuthSubmit() {
-            if (authFormMode === 'login') {
-                loginUser();
-            } else {
-                registerUser();
-            }
-        }
-        
-        // Registrar nuevo usuario
-        function registerUser() {
             const email = document.getElementById('auth-email').value.trim();
             const password = document.getElementById('auth-password').value;
             
-            if (!email || !password) {
+            if (isLoginForm) {
+                // Login
+                const user = users.find(u => u.email === email && u.password === password);
+                if (user) {
+                    currentUser = user;
+                    localStorage.setItem('currentForumUser', JSON.stringify(user));
+                    authModal.style.display = 'none';
+                    updateUI();
+                    loadThreads();
+                } else {
+                    alert('Credenciales incorrectas');
+                }
+            } else {
+                // Registro
+                if (!email || !password) {
+                    alert('Por favor completa todos los campos');
+                    return;
+                }
+                
+                if (users.some(u => u.email === email)) {
+                    alert('Este correo ya está registrado');
+                    return;
+                }
+                
+                const username = email.split('@')[0];
+                const newUser = {
+                    id: Date.now().toString(),
+                    username,
+                    email,
+                    password, // En producción, usa bcrypt para hashear
+                    createdAt: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('forumUsers', JSON.stringify(users));
+                
+                currentUser = newUser;
+                localStorage.setItem('currentForumUser', JSON.stringify(newUser));
+                authModal.style.display = 'none';
+                updateUI();
+                loadThreads();
+                
+                alert('Registro exitoso. ¡Bienvenido!');
+            }
+            
+            // Limpiar campos
+            document.getElementById('auth-email').value = '';
+            document.getElementById('auth-password').value = '';
+        }
+        
+        function handleNewThreadClick() {
+            if (!currentUser) {
+                alert('Debes iniciar sesión para crear un hilo');
+                isLoginForm = true;
+                authModal.style.display = 'flex';
+                return;
+            }
+            
+            document.getElementById('thread-title').value = '';
+            document.getElementById('thread-content').value = '';
+            threadModal.style.display = 'flex';
+        }
+        
+        function handleThreadSubmit() {
+            const title = document.getElementById('thread-title').value.trim();
+            const content = document.getElementById('thread-content').value.trim();
+            
+            if (!title || !content) {
                 alert('Por favor completa todos los campos');
                 return;
             }
             
-            // Generar nombre de usuario a partir del email
-            const username = email.split('@')[0];
-            
-            // Verificar si el usuario ya existe
-            if (users.some(user => user.email === email)) {
-                alert('Este correo ya está registrado');
-                return;
-            }
-            
-            // Crear nuevo usuario
-            const newUser = {
+            const newThread = {
                 id: Date.now().toString(),
-                username,
-                email,
-                password, // En producción, esto debería estar hasheado
-                createdAt: new Date().toISOString()
+                title,
+                content,
+                author: currentUser.username,
+                authorId: currentUser.id,
+                createdAt: new Date().toISOString(),
+                comments: [],
+                deleted: false
             };
             
-            users.push(newUser);
-            localStorage.setItem('forumUsers', JSON.stringify(users));
-            
-            alert('Registro exitoso. Ahora puedes iniciar sesión.');
-            showAuthForm('login');
+            threads.push(newThread);
+            localStorage.setItem('forumThreads', JSON.stringify(threads));
+            threadModal.style.display = 'none';
+            loadThreads();
         }
         
-        // Iniciar sesión
-        function loginUser() {
-            const email = document.getElementById('auth-email').value.trim();
-            const password = document.getElementById('auth-password').value;
-            
-            const user = users.find(u => u.email === email && u.password === password);
-            
-            if (user) {
-                currentUser = user;
-                localStorage.setItem('currentForumUser', JSON.stringify(user));
-                updateUserUI();
-                hideAuthForm();
-            } else {
-                alert('Correo o contraseña incorrectos');
-            }
-        }
-        
-        // Cerrar sesión
-        function logoutUser() {
-            currentUser = null;
-            localStorage.removeItem('currentForumUser');
-            updateUserUI();
-        }
-        
-        // Actualizar la UI según el estado de autenticación
-        function updateUserUI() {
-            const userInfo = document.getElementById('user-info');
-            const authBtn = document.getElementById('auth-btn');
-            
-            if (currentUser) {
-                userInfo.innerHTML = `
-                    <div class="user-avatar">${currentUser.username.charAt(0).toUpperCase()}</div>
-                    <span>${currentUser.username}</span>
-                `;
-                authBtn.textContent = 'CERRAR SESIÓN';
-                authBtn.onclick = logoutUser;
-            } else {
-                userInfo.innerHTML = '';
-                authBtn.textContent = 'INICIAR SESIÓN';
-                authBtn.onclick = () => showAuthForm('login');
-            }
-        }
-        
-        // Cargar hilos del foro
-        function loadThreads() {
-            const threadsList = document.getElementById('threads-list');
-            threadsList.innerHTML = '';
-            
-            if (threads.length === 0) {
-                threadsList.innerHTML = '<p style="text-align:center;">No hay hilos todavía. ¡Sé el primero en publicar!</p>';
+        function handleCommentClick(threadId) {
+            if (!currentUser) {
+                alert('Debes iniciar sesión para comentar');
+                isLoginForm = true;
+                authModal.style.display = 'flex';
                 return;
             }
             
-            // Ordenar hilos por fecha (más recientes primero)
-            const sortedThreads = [...threads].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            
-            sortedThreads.forEach(thread => {
-                const threadElement = document.createElement('div');
-                threadElement.className = 'thread';
-                threadElement.innerHTML = `
-                    <h3 class="thread-title">${thread.title}</h3>
-                    <div class="thread-meta">
-                        <span class="thread-author">${thread.author}</span>
-                        <span class="thread-date">${new Date(thread.createdAt).toLocaleString()}</span>
-                    </div>
-                    <div class="thread-content">${thread.content}</div>
-                    <div class="thread-actions">
-                        <button class="reply-btn" onclick="handleReplyClick('${thread.id}')">
-                            <i class="fas fa-reply"></i> Responder
-                        </button>
-                    </div>
-                `;
-                threadsList.appendChild(threadElement);
-            });
+            currentThreadId = threadId;
+            document.getElementById('comment-content').value = '';
+            commentModal.style.display = 'flex';
         }
+        
+        function handleCommentSubmit() {
+            const content = document.getElementById('comment-content').value.trim();
+            
+            if (!content) {
+                alert('Por favor escribe un comentario');
+                return;
+            }
+            
+            const threadIndex = threads.findIndex(t => t.id === currentThreadId);
+            if (threadIndex === -1) return;
+            
+            const newComment = {
+                id: Date.now().toString(),
+                content,
+                author: currentUser.username,
+                authorId: currentUser.id,
+                createdAt: new Date().toISOString(),
+                deleted: false
+            };
+            
+            threads[threadIndex].comments.push(newComment);
+            localStorage.setItem('forumThreads', JSON.stringify(threads));
+            commentModal.style.display = 'none';
+            loadThreads();
+        }
+        
+        function handleDeleteThread
