@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foro ZONEPVP | Moderación</title>
+    <title>Foro ZONEPVP</title>
     <style>
         :root {
             --mc-orange: #FFAA00;
@@ -11,9 +11,7 @@
             --mc-green: #55FF55;
             --mc-red: #FF5555;
             --mc-dark: #0C0C0C;
-            --mc-darker: #060606;
             --mc-gray: #555555;
-            --discord-blurple: #5865F2;
         }
         
         * {
@@ -24,184 +22,45 @@
         }
         
         body {
-            background-color: var(--mc-darker);
-            background-image: url('https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-background-logged-in.jpg');
-            background-size: cover;
+            background-color: var(--mc-dark);
             color: white;
             min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
         }
         
         header {
             text-align: center;
-            padding: 30px 0;
-            border-bottom: 3px solid var(--mc-orange);
+            margin-bottom: 20px;
         }
         
         .logo {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--mc-orange);
-            text-shadow: 3px 3px 0 var(--mc-dark-orange);
-        }
-        
-        /* Barra de usuario */
-        .user-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 10px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 5px;
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--mc-gray);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        .mod-badge {
-            background: var(--mc-red);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-size: 0.8rem;
+            margin-bottom: 10px;
         }
         
         .btn {
-            padding: 8px 15px;
+            padding: 10px 15px;
+            background: var(--mc-orange);
+            color: black;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.3s;
         }
         
-        .btn-primary {
-            background: var(--mc-orange);
-            color: black;
-        }
-        
-        .btn-danger {
-            background: var(--mc-red);
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: var(--mc-gray);
-            color: white;
-        }
-        
-        /* Hilos y comentarios */
         .thread {
             background: rgba(20,20,20,0.8);
-            border: 2px solid var(--mc-gray);
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .thread-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .thread-title {
-            color: var(--mc-orange);
-            font-size: 1.5rem;
-        }
-        
-        .thread-meta {
-            color: var(--mc-green);
-            font-size: 0.9rem;
-        }
-        
-        .thread-content {
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        
-        .thread-actions {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .comments-container {
-            margin-top: 20px;
-            border-top: 1px solid var(--mc-gray);
-            padding-top: 15px;
-        }
-        
-        .comment {
-            background: rgba(30,30,30,0.6);
-            border-left: 3px solid var(--mc-gray);
             padding: 15px;
             margin-bottom: 15px;
-            transition: all 0.3s;
-        }
-        
-        .comment:hover {
-            border-left-color: var(--mc-orange);
-        }
-        
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        
-        .comment-author {
-            color: var(--mc-green);
-            font-weight: bold;
-        }
-        
-        .comment-date {
-            color: var(--mc-orange);
-            font-size: 0.8rem;
-        }
-        
-        .comment-actions {
-            display: flex;
-            gap: 5px;
-            margin-top: 10px;
-        }
-        
-        .comment-form {
-            margin-top: 20px;
-        }
-        
-        .form-textarea {
-            width: 100%;
-            padding: 10px;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid var(--mc-gray);
-            color: white;
             border-radius: 5px;
-            min-height: 100px;
-            margin-bottom: 10px;
         }
         
-        /* Modales */
         .modal {
             display: none;
             position: fixed;
@@ -210,56 +69,26 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.8);
-            z-index: 1000;
+            z-index: 100;
             align-items: center;
             justify-content: center;
         }
         
         .modal-content {
             background: var(--mc-dark);
-            border: 3px solid var(--mc-orange);
-            border-radius: 10px;
-            padding: 30px;
+            padding: 20px;
             width: 90%;
-            max-width: 600px;
-        }
-        
-        .modal-title {
-            color: var(--mc-orange);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--mc-orange);
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 10px;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid var(--mc-gray);
-            color: white;
+            max-width: 500px;
             border-radius: 5px;
         }
         
-        .form-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-            border-top: 1px solid var(--mc-gray);
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--mc-gray);
+            color: white;
         }
     </style>
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
@@ -268,201 +97,129 @@
     <div class="container">
         <header>
             <h1 class="logo">FORO ZONEPVP</h1>
-            <p>Comunidad oficial con moderación</p>
+            <button id="auth-btn" class="btn">INICIAR SESIÓN</button>
         </header>
         
-        <!-- Barra de usuario -->
-        <div class="user-bar">
-            <div class="user-info" id="user-info">
-                <!-- Se llena dinámicamente -->
-            </div>
-            <button id="auth-btn" class="btn btn-primary">INICIAR SESIÓN</button>
-        </div>
+        <div id="threads-container"></div>
         
-        <!-- Lista de hilos -->
-        <div id="threads-container">
-            <!-- Los hilos se cargarán aquí -->
-        </div>
-        
-        <!-- Botón de nuevo hilo -->
-        <button id="new-thread-btn" class="btn btn-primary" style="display: block; margin: 30px auto;">
-            CREAR NUEVO HILO
-        </button>
+        <button id="new-thread-btn" class="btn" style="display:none;">CREAR HILO</button>
         
         <!-- Modal de autenticación -->
         <div id="auth-modal" class="modal">
             <div class="modal-content">
-                <h2 class="modal-title" id="auth-modal-title">INICIAR SESIÓN</h2>
-                <div class="form-group">
-                    <label class="form-label">Correo electrónico</label>
-                    <input type="email" id="auth-email" class="form-input">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Contraseña</label>
-                    <input type="password" id="auth-password" class="form-input">
-                </div>
-                <div class="form-actions">
-                    <button id="auth-submit-btn" class="btn btn-primary">ENTRAR</button>
-                    <button id="auth-switch-btn" class="btn btn-secondary">REGISTRARSE</button>
-                    <button id="auth-cancel-btn" class="btn btn-danger">CANCELAR</button>
+                <h2 id="auth-title">INICIAR SESIÓN</h2>
+                <input type="email" id="auth-email" placeholder="Correo">
+                <input type="password" id="auth-password" placeholder="Contraseña">
+                <div style="display:flex; gap:10px;">
+                    <button id="auth-submit" class="btn">ENTRAR</button>
+                    <button id="auth-switch" class="btn" style="background:var(--mc-gray);">REGISTRARSE</button>
+                    <button id="auth-cancel" class="btn" style="background:var(--mc-red);">CANCELAR</button>
                 </div>
             </div>
         </div>
         
-        <!-- Modal de nuevo hilo -->
+        <!-- Modal de hilo -->
         <div id="thread-modal" class="modal">
             <div class="modal-content">
-                <h2 class="modal-title">NUEVO HILO</h2>
-                <div class="form-group">
-                    <label class="form-label">Título</label>
-                    <input type="text" id="thread-title" class="form-input">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Contenido</label>
-                    <textarea id="thread-content" class="form-textarea"></textarea>
-                </div>
-                <div class="form-actions">
-                    <button id="thread-submit-btn" class="btn btn-primary">PUBLICAR</button>
-                    <button id="thread-cancel-btn" class="btn btn-danger">CANCELAR</button>
+                <h2>NUEVO HILO</h2>
+                <input type="text" id="thread-title" placeholder="Título">
+                <textarea id="thread-content" placeholder="Contenido" rows="5"></textarea>
+                <div style="display:flex; gap:10px;">
+                    <button id="thread-submit" class="btn">PUBLICAR</button>
+                    <button id="thread-cancel" class="btn" style="background:var(--mc-red);">CANCELAR</button>
                 </div>
             </div>
         </div>
-        
-        <!-- Modal de nuevo comentario -->
-        <div id="comment-modal" class="modal">
-            <div class="modal-content">
-                <h2 class="modal-title">NUEVO COMENTARIO</h2>
-                <div class="form-group">
-                    <textarea id="comment-content" class="form-textarea"></textarea>
-                </div>
-                <div class="form-actions">
-                    <button id="comment-submit-btn" class="btn btn-primary">PUBLICAR</button>
-                    <button id="comment-cancel-btn" class="btn btn-danger">CANCELAR</button>
-                </div>
-            </div>
-        </div>
-        
-        <footer>
-            <p>ZONEPVP - Minecraft Server © 2025</p>
-            <p>No afiliado a Mojang o Microsoft</p>
-        </footer>
     </div>
 
     <script>
-        // Base de datos
+        // Datos
         let users = JSON.parse(localStorage.getItem('forumUsers')) || [];
         let threads = JSON.parse(localStorage.getItem('forumThreads')) || [];
         let currentUser = JSON.parse(localStorage.getItem('currentForumUser')) || null;
-        let currentThreadId = null;
-        let isLoginForm = true;
-        
-        // Moders (puedes cambiar estos emails por los de tus moderadores)
-        const MODERATORS = ['admin@zonepvp.com', 'mod1@zonepvp.com', 'mod2@zonepvp.com'];
-        
-        // Elementos del DOM
-        const authBtn = document.getElementById('auth-btn');
-        const userInfo = document.getElementById('user-info');
-        const newThreadBtn = document.getElementById('new-thread-btn');
-        const threadsContainer = document.getElementById('threads-container');
-        
-        // Modales
-        const authModal = document.getElementById('auth-modal');
-        const threadModal = document.getElementById('thread-modal');
-        const commentModal = document.getElementById('comment-modal');
-        
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', () => {
-            updateUI();
-            loadThreads();
-            setupEventListeners();
-        });
-        
-        function setupEventListeners() {
-            // Autenticación
-            authBtn.addEventListener('click', handleAuthClick);
-            authSubmitBtn.addEventListener('click', handleAuthSubmit);
-            authSwitchBtn.addEventListener('click', handleAuthSwitch);
-            authCancelBtn.addEventListener('click', () => authModal.style.display = 'none');
-            
-            // Hilos
-            newThreadBtn.addEventListener('click', handleNewThreadClick);
-            threadSubmitBtn.addEventListener('click', handleThreadSubmit);
-            threadCancelBtn.addEventListener('click', () => threadModal.style.display = 'none');
-            
-            // Comentarios
-            commentSubmitBtn.addEventListener('click', handleCommentSubmit);
-            commentCancelBtn.addEventListener('click', () => commentModal.style.display = 'none');
-        }
-        
+        let isLoginMode = true;
+
+        // Funciones principales
         function updateUI() {
+            const authBtn = document.getElementById('auth-btn');
+            const newThreadBtn = document.getElementById('new-thread-btn');
+            
             if (currentUser) {
-                const isMod = MODERATORS.includes(currentUser.email);
-                userInfo.innerHTML = `
-                    <div class="user-avatar">${currentUser.username.charAt(0).toUpperCase()}</div>
-                    <span>${currentUser.username}</span>
-                    ${isMod ? '<span class="mod-badge">MOD</span>' : ''}
-                `;
                 authBtn.textContent = 'CERRAR SESIÓN';
+                newThreadBtn.style.display = 'block';
             } else {
-                userInfo.innerHTML = '';
                 authBtn.textContent = 'INICIAR SESIÓN';
+                newThreadBtn.style.display = 'none';
             }
         }
-        
-        function handleAuthClick() {
+
+        function loadThreads() {
+            const container = document.getElementById('threads-container');
+            container.innerHTML = '';
+            
+            threads.forEach(thread => {
+                const threadEl = document.createElement('div');
+                threadEl.className = 'thread';
+                threadEl.innerHTML = `
+                    <h3>${thread.title}</h3>
+                    <p>${thread.content}</p>
+                    <small>Publicado por: ${thread.author}</small>
+                `;
+                container.appendChild(threadEl);
+            });
+        }
+
+        // Event Listeners
+        document.getElementById('auth-btn').addEventListener('click', function() {
             if (currentUser) {
-                // Cerrar sesión
                 currentUser = null;
                 localStorage.removeItem('currentForumUser');
                 updateUI();
             } else {
-                // Mostrar modal de login
-                isLoginForm = true;
-                authModalTitle.textContent = 'INICIAR SESIÓN';
-                authSubmitBtn.textContent = 'ENTRAR';
-                authSwitchBtn.textContent = 'REGISTRARSE';
-                authModal.style.display = 'flex';
+                isLoginMode = true;
+                document.getElementById('auth-title').textContent = 'INICIAR SESIÓN';
+                document.getElementById('auth-submit').textContent = 'ENTRAR';
+                document.getElementById('auth-switch').textContent = 'REGISTRARSE';
+                document.getElementById('auth-modal').style.display = 'flex';
             }
-        }
-        
-        function handleAuthSwitch() {
-            isLoginForm = !isLoginForm;
-            if (isLoginForm) {
-                authModalTitle.textContent = 'INICIAR SESIÓN';
-                authSubmitBtn.textContent = 'ENTRAR';
-                authSwitchBtn.textContent = 'REGISTRARSE';
+        });
+
+        document.getElementById('auth-switch').addEventListener('click', function() {
+            isLoginMode = !isLoginMode;
+            const authTitle = document.getElementById('auth-title');
+            const authSubmit = document.getElementById('auth-submit');
+            const authSwitch = document.getElementById('auth-switch');
+            
+            if (isLoginMode) {
+                authTitle.textContent = 'INICIAR SESIÓN';
+                authSubmit.textContent = 'ENTRAR';
+                authSwitch.textContent = 'REGISTRARSE';
             } else {
-                authModalTitle.textContent = 'REGISTRARSE';
-                authSubmitBtn.textContent = 'REGISTRAR';
-                authSwitchBtn.textContent = 'INICIAR SESIÓN';
+                authTitle.textContent = 'REGISTRARSE';
+                authSubmit.textContent = 'REGISTRAR';
+                authSwitch.textContent = 'INICIAR SESIÓN';
             }
-        }
-        
-        function handleAuthSubmit() {
+        });
+
+        document.getElementById('auth-submit').addEventListener('click', function() {
             const email = document.getElementById('auth-email').value.trim();
             const password = document.getElementById('auth-password').value;
             
-            if (isLoginForm) {
+            if (isLoginMode) {
                 // Login
                 const user = users.find(u => u.email === email && u.password === password);
                 if (user) {
                     currentUser = user;
                     localStorage.setItem('currentForumUser', JSON.stringify(user));
-                    authModal.style.display = 'none';
+                    document.getElementById('auth-modal').style.display = 'none';
                     updateUI();
-                    loadThreads();
                 } else {
                     alert('Credenciales incorrectas');
                 }
             } else {
                 // Registro
                 if (!email || !password) {
-                    alert('Por favor completa todos los campos');
-                    return;
-                }
-                
-                if (users.some(u => u.email === email)) {
-                    alert('Este correo ya está registrado');
+                    alert('Completa todos los campos');
                     return;
                 }
                 
@@ -471,7 +228,7 @@
                     id: Date.now().toString(),
                     username,
                     email,
-                    password, // En producción, usa bcrypt para hashear
+                    password,
                     createdAt: new Date().toISOString()
                 };
                 
@@ -480,37 +237,26 @@
                 
                 currentUser = newUser;
                 localStorage.setItem('currentForumUser', JSON.stringify(newUser));
-                authModal.style.display = 'none';
+                document.getElementById('auth-modal').style.display = 'none';
                 updateUI();
-                loadThreads();
-                
-                alert('Registro exitoso. ¡Bienvenido!');
             }
-            
-            // Limpiar campos
-            document.getElementById('auth-email').value = '';
-            document.getElementById('auth-password').value = '';
-        }
-        
-        function handleNewThreadClick() {
-            if (!currentUser) {
-                alert('Debes iniciar sesión para crear un hilo');
-                isLoginForm = true;
-                authModal.style.display = 'flex';
-                return;
-            }
-            
-            document.getElementById('thread-title').value = '';
-            document.getElementById('thread-content').value = '';
-            threadModal.style.display = 'flex';
-        }
-        
-        function handleThreadSubmit() {
+        });
+
+        document.getElementById('auth-cancel').addEventListener('click', function() {
+            document.getElementById('auth-modal').style.display = 'none';
+        });
+
+        document.getElementById('new-thread-btn').addEventListener('click', function() {
+            if (!currentUser) return;
+            document.getElementById('thread-modal').style.display = 'flex';
+        });
+
+        document.getElementById('thread-submit').addEventListener('click', function() {
             const title = document.getElementById('thread-title').value.trim();
             const content = document.getElementById('thread-content').value.trim();
             
             if (!title || !content) {
-                alert('Por favor completa todos los campos');
+                alert('Completa todos los campos');
                 return;
             }
             
@@ -519,55 +265,22 @@
                 title,
                 content,
                 author: currentUser.username,
-                authorId: currentUser.id,
-                createdAt: new Date().toISOString(),
-                comments: [],
-                deleted: false
+                createdAt: new Date().toISOString()
             };
             
             threads.push(newThread);
             localStorage.setItem('forumThreads', JSON.stringify(threads));
-            threadModal.style.display = 'none';
+            document.getElementById('thread-modal').style.display = 'none';
             loadThreads();
-        }
-        
-        function handleCommentClick(threadId) {
-            if (!currentUser) {
-                alert('Debes iniciar sesión para comentar');
-                isLoginForm = true;
-                authModal.style.display = 'flex';
-                return;
-            }
-            
-            currentThreadId = threadId;
-            document.getElementById('comment-content').value = '';
-            commentModal.style.display = 'flex';
-        }
-        
-        function handleCommentSubmit() {
-            const content = document.getElementById('comment-content').value.trim();
-            
-            if (!content) {
-                alert('Por favor escribe un comentario');
-                return;
-            }
-            
-            const threadIndex = threads.findIndex(t => t.id === currentThreadId);
-            if (threadIndex === -1) return;
-            
-            const newComment = {
-                id: Date.now().toString(),
-                content,
-                author: currentUser.username,
-                authorId: currentUser.id,
-                createdAt: new Date().toISOString(),
-                deleted: false
-            };
-            
-            threads[threadIndex].comments.push(newComment);
-            localStorage.setItem('forumThreads', JSON.stringify(threads));
-            commentModal.style.display = 'none';
-            loadThreads();
-        }
-        
-        function handleDeleteThread
+        });
+
+        document.getElementById('thread-cancel').addEventListener('click', function() {
+            document.getElementById('thread-modal').style.display = 'none';
+        });
+
+        // Iniciar
+        updateUI();
+        loadThreads();
+    </script>
+</body>
+</html>
