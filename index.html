@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foro ZONEPVP</title>
+    <title>Foro ZONEPVP | Comunidad Oficial</title>
     <style>
         :root {
             --mc-orange: #FFAA00;
-            --mc-dark-orange: #8B5A00;
+            --mc-dark-orange: #8B5A00; 
             --mc-green: #55FF55;
             --mc-red: #FF5555;
             --mc-dark: #0C0C0C;
@@ -23,264 +23,281 @@
         
         body {
             background-color: var(--mc-dark);
+            background-image: url('https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-background-logged-in.jpg');
+            background-size: cover;
             color: white;
             min-height: 100vh;
-            padding: 20px;
         }
         
         .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header con logo */
+        header {
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            color: var(--mc-orange);
+            text-shadow: 3px 3px 0 var(--mc-dark-orange);
+            margin-bottom: 20px;
+        }
+        
+        /* Barra de navegación debajo del logo */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: var(--mc-gray);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: var(--mc-orange);
+        }
+        
+        /* Controles de usuario */
+        .user-controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--mc-orange);
+            cursor: pointer;
+            display: none;
+        }
+        
+        .auth-btn {
+            background: var(--mc-orange);
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background: white;
+        }
+        
+        /* Secciones de contenido */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Estilos para hilos */
+        .threads-container {
             max-width: 800px;
             margin: 0 auto;
         }
         
-        header {
-            text-align: center;
+        .thread {
+            background: rgba(20,20,20,0.8);
+            border: 2px solid var(--mc-gray);
+            border-radius: 10px;
+            padding: 20px;
             margin-bottom: 20px;
         }
         
-        .logo {
-            font-size: 2.5rem;
-            color: var(--mc-orange);
-            margin-bottom: 10px;
-        }
-        
-        .btn {
-            padding: 10px 15px;
-            background: var(--mc-orange);
-            color: black;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .thread {
+        /* Sección de Normas */
+        .rules-container {
+            max-width: 800px;
+            margin: 0 auto;
             background: rgba(20,20,20,0.8);
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid var(--mc-orange);
         }
         
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
+        /* Sección de Usuarios */
+        .users-container {
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .modal-content {
-            background: var(--mc-dark);
-            padding: 20px;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 5px;
-        }
-        
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid var(--mc-gray);
-            color: white;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 1rem;
+            }
         }
     </style>
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
 </head>
 <body>
     <div class="container">
+        <!-- Header con logo -->
         <header>
-            <h1 class="logo">FORO ZONEPVP</h1>
-            <button id="auth-btn" class="btn">INICIAR SESIÓN</button>
+            <h1 class="logo">ZONEPVP</h1>
+            
+            <!-- Barra de navegación debajo del logo -->
+            <div class="nav-container">
+                <button class="nav-btn active" onclick="showSection('home')">INICIO</button>
+                <button class="nav-btn" onclick="showSection('rules')">NORMAS</button>
+                <button class="nav-btn" onclick="showSection('users')">USUARIOS</button>
+            </div>
         </header>
         
-        <div id="threads-container"></div>
-        
-        <button id="new-thread-btn" class="btn" style="display:none;">CREAR HILO</button>
-        
-        <!-- Modal de autenticación -->
-        <div id="auth-modal" class="modal">
-            <div class="modal-content">
-                <h2 id="auth-title">INICIAR SESIÓN</h2>
-                <input type="email" id="auth-email" placeholder="Correo">
-                <input type="password" id="auth-password" placeholder="Contraseña">
-                <div style="display:flex; gap:10px;">
-                    <button id="auth-submit" class="btn">ENTRAR</button>
-                    <button id="auth-switch" class="btn" style="background:var(--mc-gray);">REGISTRARSE</button>
-                    <button id="auth-cancel" class="btn" style="background:var(--mc-red);">CANCELAR</button>
-                </div>
-            </div>
+        <!-- Controles de usuario -->
+        <div class="user-controls">
+            <img id="user-avatar" class="user-avatar" src="https://i.imgur.com/JYQ3X3E.png" onclick="showProfile()">
+            <button id="auth-btn" class="auth-btn">INICIAR SESIÓN</button>
         </div>
         
-        <!-- Modal de hilo -->
-        <div id="thread-modal" class="modal">
-            <div class="modal-content">
-                <h2>NUEVO HILO</h2>
-                <input type="text" id="thread-title" placeholder="Título">
-                <textarea id="thread-content" placeholder="Contenido" rows="5"></textarea>
-                <div style="display:flex; gap:10px;">
-                    <button id="thread-submit" class="btn">PUBLICAR</button>
-                    <button id="thread-cancel" class="btn" style="background:var(--mc-red);">CANCELAR</button>
+        <!-- Sección de Inicio -->
+        <section id="home-section" class="content-section active">
+            <div class="threads-container">
+                <div id="threads-list">
+                    <!-- Los hilos se cargarán aquí dinámicamente -->
+                    <p style="text-align: center; color: #AAA;">No hay hilos disponibles. ¡Sé el primero en publicar!</p>
+                </div>
+                
+                <button id="new-thread-btn" class="auth-btn" style="display: none; margin: 30px auto;">
+                    CREAR NUEVO HILO
+                </button>
+            </div>
+        </section>
+        
+        <!-- Sección de Normas -->
+        <section id="rules-section" class="content-section">
+            <div class="rules-container">
+                <h2 style="color: var(--mc-orange); margin-bottom: 20px;">REGLAS DEL SERVIDOR</h2>
+                
+                <ol style="padding-left: 20px; line-height: 1.8;">
+                    <li style="margin-bottom: 10px;"><strong>Prohibido hacks/cheats:</strong> Cualquier mod no permitido resultará en ban permanente.</li>
+                    <li style="margin-bottom: 10px;"><strong>Respeto:</strong> No se tolerarán insultos, acoso o discriminación.</li>
+                    <li style="margin-bottom: 10px;"><strong>No spam:</strong> Prohibido floodear el chat con mensajes repetitivos.</li>
+                    <li style="margin-bottom: 10px;"><strong>Sigue las indicaciones:</strong> Los moderadores tienen la última palabra.</li>
+                    <li style="margin-bottom: 10px;"><strong>Reporta bugs:</strong> Si encuentras errores, repórtalos en lugar de explotarlos.</li>
+                </ol>
+            </div>
+        </section>
+        
+        <!-- Sección de Usuarios -->
+        <section id="users-section" class="content-section">
+            <div class="users-container">
+                <h2 style="color: var(--mc-orange); margin-bottom: 20px;">USUARIOS REGISTRADOS</h2>
+                
+                <div id="users-list">
+                    <!-- Los usuarios se cargarán aquí dinámicamente -->
+                    <p style="text-align: center; color: #AAA;">No hay usuarios registrados</p>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 
     <script>
         // Datos
-        let users = JSON.parse(localStorage.getItem('forumUsers')) || [];
-        let threads = JSON.parse(localStorage.getItem('forumThreads')) || [];
-        let currentUser = JSON.parse(localStorage.getItem('currentForumUser')) || null;
-        let isLoginMode = true;
-
-        // Funciones principales
+        let currentUser = null;
+        let users = [];
+        let threads = [];
+        
+        // Mostrar sección
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Desactivar todos los botones
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostrar sección seleccionada
+            document.getElementById(`${sectionId}-section`).classList.add('active');
+            
+            // Activar botón correspondiente
+            document.querySelector(`.nav-btn[onclick="showSection('${sectionId}')"]`).classList.add('active');
+        }
+        
+        // Actualizar UI según autenticación
         function updateUI() {
             const authBtn = document.getElementById('auth-btn');
+            const userAvatar = document.getElementById('user-avatar');
             const newThreadBtn = document.getElementById('new-thread-btn');
             
             if (currentUser) {
                 authBtn.textContent = 'CERRAR SESIÓN';
+                userAvatar.style.display = 'block';
+                userAvatar.src = currentUser.avatar || 'https://i.imgur.com/JYQ3X3E.png';
                 newThreadBtn.style.display = 'block';
             } else {
                 authBtn.textContent = 'INICIAR SESIÓN';
+                userAvatar.style.display = 'none';
                 newThreadBtn.style.display = 'none';
             }
         }
-
-        function loadThreads() {
-            const container = document.getElementById('threads-container');
-            container.innerHTML = '';
-            
-            threads.forEach(thread => {
-                const threadEl = document.createElement('div');
-                threadEl.className = 'thread';
-                threadEl.innerHTML = `
-                    <h3>${thread.title}</h3>
-                    <p>${thread.content}</p>
-                    <small>Publicado por: ${thread.author}</small>
-                `;
-                container.appendChild(threadEl);
-            });
-        }
-
-        // Event Listeners
-        document.getElementById('auth-btn').addEventListener('click', function() {
+        
+        // Mostrar perfil
+        function showProfile() {
             if (currentUser) {
-                currentUser = null;
-                localStorage.removeItem('currentForumUser');
-                updateUI();
-            } else {
-                isLoginMode = true;
-                document.getElementById('auth-title').textContent = 'INICIAR SESIÓN';
-                document.getElementById('auth-submit').textContent = 'ENTRAR';
-                document.getElementById('auth-switch').textContent = 'REGISTRARSE';
-                document.getElementById('auth-modal').style.display = 'flex';
+                alert(`Perfil de ${currentUser.username}\nPróximamente más detalles!`);
             }
-        });
-
-        document.getElementById('auth-switch').addEventListener('click', function() {
-            isLoginMode = !isLoginMode;
-            const authTitle = document.getElementById('auth-title');
-            const authSubmit = document.getElementById('auth-submit');
-            const authSwitch = document.getElementById('auth-switch');
+        }
+        
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUI();
             
-            if (isLoginMode) {
-                authTitle.textContent = 'INICIAR SESIÓN';
-                authSubmit.textContent = 'ENTRAR';
-                authSwitch.textContent = 'REGISTRARSE';
-            } else {
-                authTitle.textContent = 'REGISTRARSE';
-                authSubmit.textContent = 'REGISTRAR';
-                authSwitch.textContent = 'INICIAR SESIÓN';
-            }
-        });
-
-        document.getElementById('auth-submit').addEventListener('click', function() {
-            const email = document.getElementById('auth-email').value.trim();
-            const password = document.getElementById('auth-password').value;
-            
-            if (isLoginMode) {
-                // Login
-                const user = users.find(u => u.email === email && u.password === password);
-                if (user) {
-                    currentUser = user;
-                    localStorage.setItem('currentForumUser', JSON.stringify(user));
-                    document.getElementById('auth-modal').style.display = 'none';
+            // Event listeners
+            document.getElementById('auth-btn').addEventListener('click', function() {
+                if (currentUser) {
+                    // Cerrar sesión
+                    currentUser = null;
                     updateUI();
                 } else {
-                    alert('Credenciales incorrectas');
+                    // Simular login (en una app real sería un formulario)
+                    currentUser = {
+                        username: 'JugadorEjemplo',
+                        avatar: 'https://i.imgur.com/JYQ3X3E.png'
+                    };
+                    updateUI();
                 }
-            } else {
-                // Registro
-                if (!email || !password) {
-                    alert('Completa todos los campos');
-                    return;
-                }
-                
-                const username = email.split('@')[0];
-                const newUser = {
-                    id: Date.now().toString(),
-                    username,
-                    email,
-                    password,
-                    createdAt: new Date().toISOString()
-                };
-                
-                users.push(newUser);
-                localStorage.setItem('forumUsers', JSON.stringify(users));
-                
-                currentUser = newUser;
-                localStorage.setItem('currentForumUser', JSON.stringify(newUser));
-                document.getElementById('auth-modal').style.display = 'none';
-                updateUI();
-            }
-        });
-
-        document.getElementById('auth-cancel').addEventListener('click', function() {
-            document.getElementById('auth-modal').style.display = 'none';
-        });
-
-        document.getElementById('new-thread-btn').addEventListener('click', function() {
-            if (!currentUser) return;
-            document.getElementById('thread-modal').style.display = 'flex';
-        });
-
-        document.getElementById('thread-submit').addEventListener('click', function() {
-            const title = document.getElementById('thread-title').value.trim();
-            const content = document.getElementById('thread-content').value.trim();
+            });
             
-            if (!title || !content) {
-                alert('Completa todos los campos');
-                return;
-            }
-            
-            const newThread = {
-                id: Date.now().toString(),
-                title,
-                content,
-                author: currentUser.username,
-                createdAt: new Date().toISOString()
-            };
-            
-            threads.push(newThread);
-            localStorage.setItem('forumThreads', JSON.stringify(threads));
-            document.getElementById('thread-modal').style.display = 'none';
-            loadThreads();
+            document.getElementById('new-thread-btn').addEventListener('click', function() {
+                alert('Funcionalidad de nuevo hilo - Próximamente!');
+            });
         });
-
-        document.getElementById('thread-cancel').addEventListener('click', function() {
-            document.getElementById('thread-modal').style.display = 'none';
-        });
-
-        // Iniciar
-        updateUI();
-        loadThreads();
     </script>
 </body>
 </html>
